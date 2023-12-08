@@ -1,0 +1,12 @@
+<view class="page">
+  <view class="page-section">
+      <view a:if="{{data==null}}" class="page-section-demo" style="height:50px;text-align:center" >
+         点击获取消息
+      </view>
+      <view a:if="{{data!=null}}" class="page-section-demo" style="height:50px;text-align:center" >
+        {{data}}
+      </view>
+      <button  a:if="{{data==null}}" type="primary" onTap="callFunction" >调用函数</button>
+      <button  a:if="{{data!=null}}" type="primary" onTap="callFunction" >重新调用</button>
+  </view>
+</view>

@@ -1,0 +1,18 @@
+<view class="header">高考志愿填报</view>
+<image class="content" mode="aspectFill" src="/image/123.jpg" />
+
+<view class="main">
+
+	<view class="module">
+    <navigator open-type="navigate" url="/pages/helloworld/helloworld" hover-class="navigator-hover"> 查大学 </navigator>
+  </view>
+  
+	<view class="module">
+    <navigator open-type="navigate" url="/pages/index3/index3" hover-class="navigator-hover">看专业 </navigator>
+    </view>
+	<view class="module">省控线</view>
+	<view class="module">心理测试</view>
+	<view class="module">录取线</view>
+	<view class="module">双一流</view>
+</view>
+

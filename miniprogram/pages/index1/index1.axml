@@ -1,0 +1,66 @@
+<view id='container' ref='saveChildRef0'>
+  <view id='index_semicircle'>
+  </view>
+  <view id='index_greet'>
+    <view id='greet_date'>
+      <!-- <view id='date_date'>
+        {{now_year}}/{{now_month}}/{{now_date}}
+      </view> -->
+      <!-- <view id='date_day'>
+        {{time}}
+      </view> -->
+      <view id='date_testend'>
+        {{time+' '+'离高考还有'+timecha+'天'}}
+      </view>
+    </view>
+    <view id='greet_pic'>
+      <view id='pic_gradientcolor'>
+      </view>
+      <view id='pic_word'>
+        Ready for the future？
+      </view>
+    </view>
+    <view id='greet_end'>
+      <view id='end_volunteer'>
+      </view>
+    </view>
+  </view>
+  <view a:if="{{showInputBox}}" class="page-mask" >
+    <view class="input-box">
+      <input placeholder="请输入内容" value="{{inputValue}}" onInput="inputChange"></input>
+      <button onTap="submitInput">提交</button>
+    </view>
+  </view>
+</view>  <view class="index_navigation  {{index_navigation_slide==true?'index_navigation_slide':''}}">
+  <view class="navigation_son {{navigation_shadow[0].start==true?'shadow_university':''}}" id='navigation_university' data-key='0' onTap='antmoveAction0' data-antmove-tap='navigation_shadow_open'>
+    <icon class='fa fa-fort-awesome fa-lg'>
+    </icon>
+    <text class='navigation_son_word'>
+      查大学      </text>
+  </view>    <view class="navigation_son {{navigation_shadow[1].start==true?'shadow_major':''}}" id='navigation_major' url=" " open-type='switchTab' data-key='1' onTap='antmoveAction' >
+    <icon class='fa fa-book fa-lg'>
+    </icon>
+    <text class='navigation_son_word'>
+      看专业      </text>
+  </view>    <view class="navigation_son {{navigation_shadow[2].start==true?'shadow_provincialcontrolline':''}}" id='navigation_provincialcontrolline' url=" " open-type='switchTab' data-key='2' onTap='antmoveAction1' >
+    <icon class='fa fa-server fa-lg'>
+    </icon>
+    <text class='navigation_son_word'>
+      省控线      </text>
+  </view>    <view class="navigation_son {{navigation_shadow[3].start==true?'shadow_psychology':''}}" id='navigation_psychology' url=" " open-type='switchTab' data-key='3' onTap='antmoveAction'>
+    <icon class='fa fa-user-md fa-lg'>
+    </icon>
+    <text class='navigation_son_word'>
+      心理测试      </text>
+  </view>    <view class="navigation_son {{navigation_shadow[4].start==true?'shadow_admissionsline':''}}" id='navigation_admissionsline' url=" " open-type='switchTab' data-key='4' onTap='antmoveAction4' >
+    <icon class='fa fa-bar-chart fa-lg'>
+    </icon>
+    <text class='navigation_son_word'>
+      录取线      </text>
+  </view>    <view class="navigation_son {{navigation_shadow[5].start==true?'shadow_twobest':''}}" id='navigation_twobest' url=" " open-type='switchTab' data-key='5' onTap='antmoveAction5' >
+    <icon class='fa fa-flag fa-lg'>
+    </icon>
+    <text class='navigation_son_word'>
+      双一流      </text>
+  </view>
+</view>

@@ -1,0 +1,212 @@
+<view class='page-container-classname'>
+  <view class='container' ref='saveChildRef0'>
+    <view class='me_head'>
+      <view class='head_in'>
+      </view>
+      <view class='haed_out'>
+        <view class='head_logo'>
+          <image
+            class='userinfo-avatar'
+            src='{{userInfo.avatarUrl}}'
+            background-size='cover'
+            onTap='antmoveAction'
+            data-antmove-tap='bindViewTap'
+          >
+          </image>
+          <btn
+            a:if='{{!hasUserInfo}}'
+            open-type='getAuthorize'
+            class='get_user'
+            onGetAuthorize='getUserInfo'
+            scope='userInfo'
+          >
+            <icon class='fa fa-user fa-lg'>
+            </icon>
+          </btn>
+        </view>
+        <view class='head_name'>
+          <text class='name'>
+            {{!hasUserInfo?'点击获取头像昵称':userInfo.nickName}}
+          </text>
+        </view>
+      </view>
+    </view>
+    <view class='head_tel'>
+      <icon class='fa fa-phone fa-lg'>
+      </icon>
+      <text class='tel_word'>
+        TEL
+      </text>
+      <input
+        class='tel_num'
+        value="{{tel!=-1?'':''}}"
+        type='text'
+        placeholder="{{tel!=-1?tel:'输入我的号码'}}"
+        onInput='tel_set'
+      >
+      </input>
+      <btn class='get_phone' onTap='antmoveAction' data-antmove-tap='tel_up'>
+        <icon class='fa fa-pencil-square-o fa-lg'>
+        </icon>
+      </btn>
+    </view>
+    <view class='grade_Bubble'>
+      <view class='Bubble_cir'>
+        <view class='Bubble1'>
+          <view
+            class="Bubble1_cir {{Bubble[0].move==true?'Bubble_ani':''}}"
+            data-key='0'
+            onTap='antmoveAction'
+            data-antmove-tap='grade_input_open'
+            onAnimationend='Bubble_again'
+          >
+            <text>
+              {{Bubble[0].grade!=-1?Bubble[0].grade:''}}
+            </text>
+            <icon a:if='{{Bubble[0].grade==-1}}' class='fa fa-hand-o-up fa-lg'>
+            </icon>
+          </view>
+        </view>
+        <view class='Bubble2'>
+          <view
+            class="Bubble2_cir {{Bubble[1].move==true?'Bubble_ani':''}}"
+            data-key='1'
+            onTap='antmoveAction'
+            data-antmove-tap='grade_input_open'
+            onAnimationend='Bubble_again'
+          >
+            <text>
+              {{Bubble[1].grade!=-1?Bubble[1].grade:''}}
+            </text>
+            <icon a:if='{{Bubble[1].grade==-1}}' class='fa fa-hand-o-up fa-lg'>
+            </icon>
+          </view>
+        </view>
+        <view class='Bubble3'>
+          <view
+            class="Bubble3_cir {{Bubble[2].move==true?'Bubble_ani':''}}"
+            data-key='2'
+            onTap='antmoveAction'
+            data-antmove-tap='grade_input_open'
+            onAnimationend='Bubble_again'
+          >
+            <text>
+              {{Bubble[2].grade!=-1?Bubble[2].grade:''}}
+            </text>
+            <icon a:if='{{Bubble[2].grade==-1}}' class='fa fa-hand-o-up fa-lg'>
+            </icon>
+          </view>
+        </view>
+        <view class='Bubble_left'>
+          <view class="left_little1 {{little1==true?'little_move':''}}">
+          </view>
+          <view class="left_little2 {{little2==true?'little_move2':''}}">
+          </view>
+          <view
+            class="left_little3 {{little3==true?'little_move':''}}"
+            onAnimationend='little_again'
+          >
+          </view>
+        </view>
+        <view class='Bubble_right'>
+          <view class="right_little1 {{little4==true?'little_move2':''}}">
+          </view>
+          <view class="right_little2 {{little5==true?'little_move':''}}">
+          </view>
+          <view class="right_little3 {{little6==true?'little_move':''}}">
+          </view>
+        </view>
+      </view>
+      <view class='Bubble_name'>
+        <view class='name1'>
+          一模成绩
+        </view>
+        <view class='name2'>
+          二模成绩
+        </view>
+        <view class='name3'>
+          三模成绩
+        </view>
+      </view>
+    </view>
+    <view class='me_wish'>
+      <view class='wish_title'>
+        我的志愿
+      </view>
+      <view class='wish_block' onTap='antmoveAction' data-antmove-tap='university_input_open'>
+        <icon class='fa fa-fort-awesome fa-lg'>
+        </icon>
+        <text>
+          {{mywish==-1 || mywish=="undefined"?'输入我的志愿':mywish}}
+        </text>
+      </view>
+    </view>
+    <custom-navigator class='me_advice' open-type='navigate' url='../advice/advice'>
+      <icon class='fa fa-comments-o fa-lg'>
+      </icon>
+      <text>
+        声明
+      </text>
+      <icon class='fa fa-chevron-right fa-lg'>
+      </icon>
+    </custom-navigator>
+  </view>
+  <view a:if='{{curtain_black_top}}' id='curtain_black_top' class="{{curtain_ani==true?'curtain_black':'curtain_black_reverse'}}">
+  </view>
+  <view
+    a:if='{{curtain_black_top&&!curtain_university_top}}'
+    id='grade_input'
+    class="{{grade_input==true?'grade_input_come':'grade_input_reverse'}}"
+    onAnimationend='input_word'
+  >
+    <input
+      placeholder='输入你的分数'
+      placeholder-class="grade_text {{grade_input_word==true?'grade_input_word':''}}"
+      onInput='grade_set'
+    >
+    </input>
+    <icon
+      class='fa fa-close fa-lg fa-close_input'
+      data-key='close'
+      onTap='antmoveAction'
+      data-antmove-tap='grade_input_close'
+    >
+    </icon>
+    <icon
+      class='fa fa-check fa-lg fa-check_input'
+      data-key='check'
+      onTap='antmoveAction'
+      data-antmove-tap='grade_input_close'
+    >
+    </icon>
+  </view>
+  <view
+    a:if='{{curtain_university_top}}'
+    id='university_input'
+    class="{{grade_input==true?'grade_input_come':'grade_input_reverse'}}"
+    onAnimationend='input_word'
+  >
+    <input
+      placeholder='你想找哪间大学呀？'
+      placeholder-class="grade_text {{grade_input_word==true?'grade_input_word':''}}"
+      onInput='wish_set'
+    >
+    </input>
+    <icon
+      class='fa fa-close fa-lg fa-close_university'
+      data-key='university_close'
+      data-search='false'
+      onTap='antmoveAction'
+      data-antmove-tap='grade_input_close'
+    >
+    </icon>
+    <icon
+      class='fa fa-search fa-lg fa-search_university'
+      data-key='university_close'
+      data-search='true'
+      onTap='antmoveAction'
+      data-antmove-tap='grade_input_close'
+    >
+    </icon>
+  </view>
+</view>

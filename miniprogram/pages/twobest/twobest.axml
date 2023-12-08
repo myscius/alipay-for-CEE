@@ -1,0 +1,134 @@
+<!--<view class='page-container-classname'> -->
+<view id='container'>
+  <view class='inc_change'>
+    <view class='change_college' onTap="{{now_inc==true?'':'inc_change'}}">
+      <icon class='fa fa-fort-awesome'>
+      </icon>
+      <text>
+        一流大学
+      </text>
+    </view>
+    <view class='change_gongsi' onTap="{{now_inc==false?'':'inc_change'}}">
+      <text>
+        一流学科
+      </text>
+      <icon class='fa fa-book'>
+      </icon>
+    </view>
+    <view class="change_block {{now_inc==true?'':'change_block_right'}}">
+    </view>
+  </view>
+  <view class='twobeast_content'>
+    <view a:if='{{college_open}}' class="content_college {{now_inc&&ani_start==true?'inc_college_back':''}} {{now_inc==false&&ani_start==true?'inc_college_hidden':''}}">
+    <view class='content_A'>
+      <view class='A_title'>
+        <view class='title_i'>
+          <icon class='fa fa-font'>
+          </icon>
+        </view>
+        <view class='title_name'>
+          类大学
+        </view>
+      </view>
+      <view a:for="{{college_A}}" class='A_son'>
+        <view class='son_img'>
+          <image class='del' src='/images/icon/boom_b.png' mode='aspectFill'></image>
+          <text>
+            {{index+1}}
+          </text>
+        </view>
+        <view class='son_name'>
+          <view class='name_front'>
+            {{item.front}}
+          </view>
+          <view class='name_last'>
+            {{item.behind}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='content_B'>
+      <view class='B_title'>
+        <view class='title_i'>
+          <icon class='fa fa-bold'>
+          </icon>
+        </view>
+        <view class='title_name'>
+          类大学
+        </view>
+      </view>
+      <view a:for='{{college_B}}' class='B_son' ref-numbers='{{college_B}}'>
+        <view class='son_img'>
+          <!--<image class='del' src='/images/icon/boom_y.png' mode='aspectFill'></image> -->
+          <text>
+            {{index+1}}
+          </text>
+        </view>
+        <view class='son_name'>
+          <view class='name_front'>
+            {{item.front}}
+          </view>
+          <view class='name_last'>
+            {{item.behind}}
+          </view>
+        </view>
+      </view>
+    </view>
+    </view>
+    <view
+      a:if='{{major_open}}'
+      class="content_major {{now_inc&&ani_start==true?'inc_major_back':''}} {{now_inc==false&&ani_start==true?'inc_major_hidden':''}}"
+      onAnimationend='curtain_close'
+    >
+      <!-- <scroll-view
+        scroll-y='true'
+        
+        style='height:{{height_W}}px;'
+        scroll-with-animation=" "
+      > -->
+        <view
+          a:for='{{college_major}}'
+          class='major_son scroll-view-item'
+          data-key='{{index}}'
+          id='major_son{{index}}'
+          onTap="list_show"
+          data-antmove-tap='major_slide'
+        >
+          <view class='major_college'>
+            <view class='son_num'>
+              <view
+                class="bottom_circle {{item.spread==true?'bottom_circle_ani':''}} {{item.spread==false&&item.slide==true?'bottom_circle_ani2':''}}"
+                data-key='{{index}}'
+                onAnimationend='i_flashes'
+                onTap="list_show"
+              >
+              </view>
+              <view class='major_num'>
+                {{index+1}}
+              </view>
+            </view>
+            <view class='son_name'>
+              <view class='name_front'>
+                {{item.front}}
+              </view>
+              <view class='name_last'>
+                {{item.behind}}
+              </view>
+            </view>
+          </view>
+          <view class='majot_list' hidden='{{!college_major[index].spread}}'>
+            <text
+              a:for='{{major_list[index]}}'
+              a:for-item='list'
+              class='list_son list_son_ani'
+              ref-numbers='{{major_list[index]}}'
+            >
+              {{list}}
+            </text>
+          </view>
+        </view>
+      <!-- </scroll-view> -->
+    </view>
+  </view>
+  <!-- </view><view a:if='{{curtain}}' class='curtain'></view> -->
+  <!--</view> -->

@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index1/index1",
+    "pages/index/index",
+    "pages/helloworld/helloworld",
+    "pages/index3/index3",
+    "pages/index2/index2",
+    "pages/major_watch/major_watch",
+    "pages/province_line/province_line",
+    "pages/admission_line/admission_line",
+    "pages/twobest/twobest",
+    "pages/colleges/index",
+    "pages/mine/index"
+  ],
+  "window": {
+    "titleBarColor": "#ED5276",
+    "defaultTitle": "支付宝云开发"
+  },
+  "tabBar": {
+    "textColor": "#dddddd",
+    "selectedColor": "#49a9ee",
+    "backgroundColor": "#ffffff",
+    "items": [
+      {
+        "pagePath": "pages/index1/index1",
+        "name": "首页",
+        "icon": "/image/tab/home-0.png",
+        "activeIcon": "/image/tab/home-1.png"
+      },
+      {
+				"pagePath": "pages/colleges/index",
+				"name": "高校介绍",
+				"icon": "/image/tab/hat-0.png",
+				"activeIcon": "/image/tab/hat-1.png"
+			},
+			{
+				"pagePath": "pages/mine/index",
+				"name": "我的",
+				"icon": "/image/tab/me-0.png",
+				"activeIcon": "/image/tab/me-1.png"
+			}
+    ]
+  }
+}
