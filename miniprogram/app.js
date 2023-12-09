@@ -5,7 +5,7 @@ App({
   try {
     //初始化function调用，修改为自己的环境 ID
     const context = await my.cloud.createCloudContext({
-      env: 'env-00jx4sqc6zmx'
+      env: 'env-00jx4wv6n65z'
     });
     await context.init();
     my.fncontext = context;
