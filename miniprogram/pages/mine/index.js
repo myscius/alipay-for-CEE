@@ -1,3 +1,5 @@
+// import "./__antmove/component/componentClass.js";
+const app = getApp();
 Page({
   data: {
     little1: false,
@@ -35,7 +37,9 @@ Page({
     //志愿大学上传
     userid: ""
   },
-  onLaunch: function () {},
+  onLaunch: function () {
+    // login
+  },
   check_user: function (e) {},
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo;
@@ -61,15 +65,25 @@ Page({
       };
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
-      _my.getUserInfo({
+      my.fncontext.callFunction({
+        name: "getUserInfo",
         success: res => {
           app.globalData.userInfo = res.userInfo;
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
           });
-        }
-      });
+        },
+      })
+      // _my.getUserInfo({
+      //   success: res => {
+      //     app.globalData.userInfo = res.userInfo;
+      //     this.setData({
+      //       userInfo: res.userInfo,
+      //       hasUserInfo: true
+      //     });
+      //   }
+      // });
     }
   },
   //上传电话号码
@@ -120,12 +134,12 @@ Page({
   university_input_open: function (e) {}, // 点击输入我的志愿
   grade_input_close: function (e) {
     let that = this;
-        var index = e.currentTarget.dataset.key;
-        this.setData({
-            grade_input: false,
-            grade_input_word: false,
-            curtain_ani: false
-        });
+    var index = e.currentTarget.dataset.key;
+    this.setData({
+      grade_input: false,
+      grade_input_word: false,
+      curtain_ani: false
+    });
   },
   little_rise: function (e) {
     var that = this;
@@ -195,7 +209,49 @@ Page({
   //上传信息
   up_data: function (e) {},
   //向后台请求数据
-  search: function (e) {},
+  search: function (e) {
+    my.showLoading({
+      title: "数据加载中",
+      mask: true
+    });
+
+    let that = this;
+
+    // _my.request({
+    //   url: app.globalData.url + "/Me_gaokao2.php",
+    //   data: {
+    //     my_userid: app.globalData.userid
+    //   },
+    //   header: {
+    //     "content-type": "application/json"
+    //   },
+    //   method: "GET",
+    //   success: function (res) {
+    //     var Bubble_list = res.data;
+    //     var onegrade = "Bubble[0].grade";
+    //     var twograde = "Bubble[1].grade";
+    //     var thrgrade = "Bubble[2].grade";
+    //     if (res.data != -1)
+    //       that.setData({
+    //         [onegrade]: Bubble_list["mk_onegrade"],
+    //         [twograde]: Bubble_list["mk_twograde"],
+    //         [thrgrade]: Bubble_list["mk_thrgrade"],
+    //         mywish: Bubble_list["mz_oneschool"],
+    //         tel: Bubble_list["my_mobilePhoneNumber"]
+    //       });
+    //     else
+    //       that.setData({
+    //         [onegrade]: -1,
+    //         [twograde]: -1,
+    //         [thrgrade]: -1,
+    //         mywish: -1,
+    //         tel: -1
+    //       });
+
+        my.hideLoading();
+    //   }
+    // });
+  },
 
   /**
    * 生命周期函数--监听页面加载
