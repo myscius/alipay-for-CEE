@@ -38,7 +38,47 @@ Page({
     userid: ""
   },
   onLaunch: function () {
-    // login
+    // login 此处应该使用支付宝授权登录
+    let that = this;
+    my.fncontext.callFunction({
+      name: "login",
+      data: {
+        auth_code: "root"
+      },
+      success: res => {
+        console.log('login')
+        that.setData({
+          userid: res.result
+        });
+        console.log(res);
+
+        // 本应该是search的内容
+        var user_data = res.result[0];
+        console.log('user_data')
+        console.log(user_data)
+        // app.globalData.userInfo = res.userInfo;
+        var onegrade = "Bubble[0].grade";
+        var twograde = "Bubble[1].grade";
+        var thrgrade = "Bubble[2].grade";
+        if (user_data != -1)
+          that.setData({
+            [onegrade]: user_data["mk_onegrade"],
+            [twograde]: user_data["mk_twograde"],
+            [thrgrade]: user_data["mk_thrgrade"],
+            mywish: user_data["mz_oneschool"],
+            tel: user_data["my_mobilePhoneNumber"]
+          });
+        else
+          that.setData({
+            [onegrade]: -1,
+            [twograde]: -1,
+            [thrgrade]: -1,
+            mywish: -1,
+            tel: -1
+          });
+        
+      },
+    })
   },
   check_user: function (e) {},
   getUserInfo: function (e) {
@@ -75,15 +115,7 @@ Page({
           });
         },
       })
-      // _my.getUserInfo({
-      //   success: res => {
-      //     app.globalData.userInfo = res.userInfo;
-      //     this.setData({
-      //       userInfo: res.userInfo,
-      //       hasUserInfo: true
-      //     });
-      //   }
-      // });
+
     }
   },
   //上传电话号码
@@ -214,8 +246,46 @@ Page({
       title: "数据加载中",
       mask: true
     });
+    console.log('userid');
+    console.log(typeof this.data.userid);
 
     let that = this;
+    my.fncontext.callFunction({
+      name: "search",
+      data: {
+        id: that.data.userid
+      },
+      success: res => {
+        console.log("search");
+        console.log(res);
+        if (res.result!=-1){
+          // var user_data = res.result[0];
+          // console.log('user_data')
+          // console.log(user_data)
+          // // app.globalData.userInfo = res.userInfo;
+          // var onegrade = "Bubble[0].grade";
+          // var twograde = "Bubble[1].grade";
+          // var thrgrade = "Bubble[2].grade";
+          // if (user_data != -1)
+          //   that.setData({
+          //     [onegrade]: user_data["mk_onegrade"],
+          //     [twograde]: user_data["mk_twograde"],
+          //     [thrgrade]: user_data["mk_thrgrade"],
+          //     mywish: user_data["mz_oneschool"],
+          //     tel: user_data["my_mobilePhoneNumber"]
+          //   });
+          // else
+          //   that.setData({
+          //     [onegrade]: -1,
+          //     [twograde]: -1,
+          //     [thrgrade]: -1,
+          //     mywish: -1,
+          //     tel: -1
+          //   });
+        }
+        
+      },
+    })
 
     // _my.request({
     //   url: app.globalData.url + "/Me_gaokao2.php",
@@ -265,6 +335,8 @@ Page({
     that.Bubble_move();
     that.user_set();
     that.onLaunch();
+    
+    // 这里不是同步顺序执行，导致了userid来不及更新
     that.search();
   },
 
