@@ -1,0 +1,5 @@
+<view class='container' ref='saveChildRef0'>
+  <view class='our_word'>
+    {{advice}}
+  </view>
+</view>

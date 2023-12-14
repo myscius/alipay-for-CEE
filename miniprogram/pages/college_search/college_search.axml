@@ -1,0 +1,15 @@
+<view id='container' ref='saveChildRef0'>
+  <view class='college_search '>
+    <input class='search_input' placeholder='输入大学关键字' onBlur='college_name_set'>
+    </input>
+    <view class='search_button'>
+      <icon class='fa fa-search fa-lg' onTap='antmoveAction' data-antmove-tap='search'>
+      </icon>
+    </view>
+  </view>
+  <view class='college_list'>
+    <view class="list_son {{college[index].shock==true?'list_shock':''}} {{college[index].color==1?'list_son_1':''}} {{college[index].color==2?'list_son_2':''}} {{college[index].color==3?'list_son_3':''}}" a:for='{{college}}' data-key='{{index}}' ref-numbers='{{college}}' onTap='antmoveAction' data-antmove-tap='list_shock'>
+      {{college[index].name}}
+    </view>
+  </view>
+</view>

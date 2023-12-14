@@ -1,4 +1,5 @@
 // import "./__antmove/component/componentClass.js";
+const _my = require("../../__antmove/api/index.js")(my);
 const app = getApp();
 Page({
   data: {
@@ -76,11 +77,35 @@ Page({
             mywish: -1,
             tel: -1
           });
-        
+
       },
     })
   },
-  check_user: function (e) {},
+  check_user: function (e) {
+    var that = this;
+
+    _my.openSetting({
+      success: res => {
+        _my.getUserInfo({
+          success: res => {
+            console.log(res.userInfo); // 可以将 res 发送给后台解码出 unionId
+
+            this.globalData.userInfo = res.userInfo; // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+            // 所以此处加入 callback 以防止这种情况
+
+            if (this.userInfoReadyCallback) {
+              this.userInfoReadyCallback(res);
+            }
+          }
+        });
+
+        that.user_set();
+      },
+      fail: res => {
+        console.log(-1);
+      }
+    });
+  },
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo;
     this.setData({
@@ -105,17 +130,15 @@ Page({
       };
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
-      my.fncontext.callFunction({
-        name: "getUserInfo",
+      _my.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo;
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
           });
-        },
-      })
-
+        }
+      });
     }
   },
   //上传电话号码
@@ -162,16 +185,58 @@ Page({
       grade_input_word: true
     });
   },
-  grade_input_open: function (e) {},
-  university_input_open: function (e) {}, // 点击输入我的志愿
+  grade_input_open: function (e) {
+    var index = e.currentTarget.dataset.key;
+        let that = this;
+        that.setData({
+            grade_input: true,
+            curtain_black_top: true,
+            now_input: index,
+            curtain_ani: true
+        });
+  },
+  university_input_open: function (e) {
+    let that = this;
+    that.setData({
+      grade_input: true,
+      curtain_black_top: true,
+      curtain_ani: true,
+      curtain_university_top: true
+    });
+  }, // 点击输入我的志愿
   grade_input_close: function (e) {
+    console.log("grade_input_close")
     let that = this;
     var index = e.currentTarget.dataset.key;
     this.setData({
       grade_input: false,
       grade_input_word: false,
-      curtain_ani: false
+      curtain_ani: false,
+      curtain_black_top: false,
     });
+    setTimeout(function () {
+      that.setData({
+        curtain_black_top: false,
+        curtain_university_top: false
+      });
+
+      if (index == "check") {
+        var form_grade_fake = that.data.form_grade_fake;
+        var form_grade = "Bubble[" + that.data.now_input + "].grade";
+        that.setData({
+          [form_grade]: form_grade_fake
+        });
+        // that.up_data(); //上传分数
+      } else if (index == "university_close") {
+        var search = e.currentTarget.dataset.search;
+        if (search == "true")
+          _my.navigateTo({
+            url: "../college_search/college_search?college_name=" +
+              that.data.mywish_fake +
+              "&source=me"
+          });
+      }
+    }, 300); //解除禁止操作
   },
   little_rise: function (e) {
     var that = this;
@@ -239,7 +304,37 @@ Page({
     }, 1500);
   },
   //上传信息
-  up_data: function (e) {},
+  up_data: function (e) {
+    _my.showLoading({
+      title: "数据加载中",
+      mask: true
+    });
+
+    let that = this;
+
+    // _my.request({
+    //   url: app.globalData.url + "/Me_gaokao.php",
+    //   data: {
+    //     my_userid: app.globalData.userid,
+    //     mk_onegrade: that.data.Bubble[0].grade,
+    //     mk_twograde: that.data.Bubble[1].grade,
+    //     mk_thrgrade: that.data.Bubble[2].grade,
+    //     mz_oneschool: that.data.mywish,
+    //     mz_twoschool: -1,
+    //     mz_thrschool: -1,
+    //     my_mobilePhoneNumber: that.data.tel
+    //   },
+    //   header: {
+    //     "content-type": "application/json"
+    //   },
+    //   method: "GET",
+    //   success: function (res) {
+    //     console.log(res.data);
+
+    _my.hideLoading();
+    //   }
+    // });
+  },
   //向后台请求数据
   search: function (e) {
     my.showLoading({
@@ -258,7 +353,7 @@ Page({
       success: res => {
         console.log("search");
         console.log(res);
-        if (res.result!=-1){
+        if (res.result != -1) {
           // var user_data = res.result[0];
           // console.log('user_data')
           // console.log(user_data)
@@ -283,7 +378,7 @@ Page({
           //     tel: -1
           //   });
         }
-        
+
       },
     })
 
@@ -318,7 +413,7 @@ Page({
     //         tel: -1
     //       });
 
-        my.hideLoading();
+    my.hideLoading();
     //   }
     // });
   },
@@ -335,7 +430,7 @@ Page({
     that.Bubble_move();
     that.user_set();
     that.onLaunch();
-    
+
     // 这里不是同步顺序执行，导致了userid来不及更新
     that.search();
   },

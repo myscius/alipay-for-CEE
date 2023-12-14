@@ -10,7 +10,9 @@
     "pages/admission_line/admission_line",
     "pages/twobest/twobest",
     "pages/colleges/index",
-    "pages/mine/index"
+    "pages/mine/index",
+    "pages/college_search/college_search",
+    "pages/advice/advice"
   ],
   "window": {
     "titleBarColor": "#ED5276",
