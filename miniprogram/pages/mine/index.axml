@@ -141,15 +141,19 @@
         </text>
       </view>
     </view>
-    <custom-navigator class='me_advice' open-type='navigate' url='../advice/advice'>
-      <icon class='fa fa-comments-o fa-lg'>
-      </icon>
-      <text>
-        声明
-      </text>
-      <icon class='fa fa-chevron-right fa-lg'>
-      </icon>
-    </custom-navigator>
+    <view class="luqi">
+
+
+      <custom-navigator class='me_advice' open-type='navigate' url='../advice/advice'>
+        <icon class='fa fa-comments-o fa-lg'>
+        </icon>
+        <text>
+          声明
+        </text>
+        <icon class='fa fa-chevron-right fa-lg'>
+        </icon>
+      </custom-navigator>
+    </view>
   </view>
   <view a:if='{{curtain_black_top}}' id='curtain_black_top' class="{{curtain_ani==true?'curtain_black':'curtain_black_reverse'}}">
   </view>
@@ -165,14 +169,19 @@
       onInput='grade_set'
     >
     </input>
-    <view class='fa fa-close fa-lg fa-close_input' data-key='close' onTap='antmoveAction' data-antmove-tap='grade_input_close'>
-    <!-- <icon
+    <view
+      class='fa fa-close fa-lg fa-close_input'
+      data-key='close'
+      onTap='antmoveAction'
+      data-antmove-tap='grade_input_close'
+    >
+      <!--<icon
       class='fa fa-close fa-lg fa-close_input'
       data-key='close'
       onTap='antmoveAction'
       data-antmove-tap='grade_input_close'
     > -->
-    <!-- </icon> -->
+      <!--</icon> -->
     </view>
     <view
       class='fa fa-check fa-lg fa-check_input'

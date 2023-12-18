@@ -39,8 +39,13 @@ Page({
     userid: ""
   },
   onLaunch: function () {
+    my.showLoading({
+      title: "数据加载中",
+      mask: true
+    });
     // login 此处应该使用支付宝授权登录
     let that = this;
+    console.log('luqi')
     if (that.data.hasUserInfo) {
       console.log('nickName');
       console.log(that.data.userInfo.nickName);
@@ -81,10 +86,11 @@ Page({
               mywish: -1,
               tel: -1
             });
-
+            my.hideLoading();
         },
       })
-    }
+    };
+    
   },
   check_user: function (e) {
     var that = this;
@@ -388,12 +394,18 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  async onLoad(options) {
     let that = this;
-    that.onLaunch();
+    my.showLoading({
+      title: "数据加载中",
+      mask: true
+    });
+    setTimeout( "", 3000);
+    
     that.setData({
       userid: app.globalData.userid
     });
+    that.onLaunch();
     that.little_rise();
     that.Bubble_move();
     
@@ -401,6 +413,8 @@ Page({
     
     // 这里不是同步顺序执行，导致了userid来不及更新
     that.search();
+    my.hideLoading();
+    
   },
 
   /**

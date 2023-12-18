@@ -6,6 +6,10 @@
     margin-bottom: 300rpx;
 }
 
+.luqi{
+margin-top: 30px;
+}
+
 .me_head {
     display: flex;
     width: 750rpx;
