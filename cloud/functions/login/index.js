@@ -9,7 +9,7 @@ const getUserName = () => {
 exports.main = async (event, context) => {
   // 获取 msyql 访问实例
   const mysql = cloud.mysql();
-  
+
   // 新建 user 表
   await mysql.query(
     'CREATE TABLE IF NOT EXISTS `user_login` (\n' +
@@ -28,28 +28,31 @@ exports.main = async (event, context) => {
     ') ENGINE=InnoDB;'
   );
 
-  // // 向 user 表插入数据
-  // const userName = getUserName();
-  // const inserted = await mysql.insert('user_login', {
-  //   user_name: userName,
-  //   description: 'root',
-  //   password: crypto.randomBytes(10).toString('hex'),
-  //   mk_onegrade:-1,
-  //   mk_twograde:-1,
-  //   mk_thrgrade:-1,
-  //   mz_oneschool:-1,
-  //   mz_twoschool:-1,
-  //   mz_thrschool:-1,
-  //   my_mobilePhoneNumber:-1,
-  // });
-  // console.log('新增 root', inserted.insertId);
+  const search_user = await mysql.query('SELECT * FROM user_login WHERE user_name = ?', [event.nickName]);
+  if (search_user.length < 1) {
+    // 向 user 表插入数据
+    const userName = getUserName();
+    const inserted =  mysql.insert('user_login', {
+      user_name: event.nickName,
+      description: 'user',
+      password: crypto.randomBytes(10).toString('hex'),
+      mk_onegrade: -1,
+      mk_twograde: -1,
+      mk_thrgrade: -1,
+      mz_oneschool: -1,
+      mz_twoschool: -1,
+      mz_thrschool: -1,
+      my_mobilePhoneNumber: -1,
+    });
+    console.log('新增 user', inserted.insertId);
+    const ans =  mysql.query('SELECT * FROM user_login WHERE user_name = ?', [event.nickName]);
+  }else{
+    const ans = search_user;
+  };
 
   // 查询 user
   // const rows = await mysql.select('user_login');
   // console.log('当前 user 表数据', rows);
-  const ans = await mysql.query('SELECT * FROM user_login WHERE description = ?',[event.auth_code])
-  console.log("login ans")
-  console.log(typeof ans)
 
   // // 更新 user 表
   // const updated = await mysql.update(
@@ -64,11 +67,8 @@ exports.main = async (event, context) => {
   // // 删除数据
   // const deleted = await mysql.delete('user_login', { id: inserted.insertId });
   // console.log(`成功删除 ${deleted.affectedRows} 条数据`);
-  
-  if (ans.length>0){
-    return ans;
-  }else{
-    return -1;
-  }
-  
+
+  const ans =  mysql.query('SELECT * FROM user_login WHERE user_name = ?', [event.nickName]);
+  return ans;
+
 };

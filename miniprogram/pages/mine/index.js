@@ -41,45 +41,50 @@ Page({
   onLaunch: function () {
     // login 此处应该使用支付宝授权登录
     let that = this;
-    my.fncontext.callFunction({
-      name: "login",
-      data: {
-        auth_code: "root"
-      },
-      success: res => {
-        console.log('login')
-        that.setData({
-          userid: res.result
-        });
-        console.log(res);
-
-        // 本应该是search的内容
-        var user_data = res.result[0];
-        console.log('user_data')
-        console.log(user_data)
-        // app.globalData.userInfo = res.userInfo;
-        var onegrade = "Bubble[0].grade";
-        var twograde = "Bubble[1].grade";
-        var thrgrade = "Bubble[2].grade";
-        if (user_data != -1)
+    if (that.data.hasUserInfo) {
+      console.log('nickName');
+      console.log(that.data.userInfo.nickName);
+      my.fncontext.callFunction({
+        name: "login",
+        data: {
+          nickName: that.data.userInfo.nickName
+        },
+        success: res => {
+          console.log('login')
           that.setData({
-            [onegrade]: user_data["mk_onegrade"],
-            [twograde]: user_data["mk_twograde"],
-            [thrgrade]: user_data["mk_thrgrade"],
-            mywish: user_data["mz_oneschool"],
-            tel: user_data["my_mobilePhoneNumber"]
+            userid: res.result
           });
-        else
-          that.setData({
-            [onegrade]: -1,
-            [twograde]: -1,
-            [thrgrade]: -1,
-            mywish: -1,
-            tel: -1
-          });
+          console.log('login res');
+          console.log(res);
 
-      },
-    })
+          // 本应该是search的内容
+          var user_data = res.result[0];
+          console.log('user_data')
+          console.log(user_data)
+          // app.globalData.userInfo = res.userInfo;
+          var onegrade = "Bubble[0].grade";
+          var twograde = "Bubble[1].grade";
+          var thrgrade = "Bubble[2].grade";
+          if (user_data != -1)
+            that.setData({
+              [onegrade]: user_data["mk_onegrade"],
+              [twograde]: user_data["mk_twograde"],
+              [thrgrade]: user_data["mk_thrgrade"],
+              mywish: user_data["mz_oneschool"],
+              tel: user_data["my_mobilePhoneNumber"]
+            });
+          else
+            that.setData({
+              [onegrade]: -1,
+              [twograde]: -1,
+              [thrgrade]: -1,
+              mywish: -1,
+              tel: -1
+            });
+
+        },
+      })
+    }
   },
   check_user: function (e) {
     var that = this;
@@ -88,6 +93,7 @@ Page({
       success: res => {
         _my.getUserInfo({
           success: res => {
+            console.log("userInfo");
             console.log(res.userInfo); // 可以将 res 发送给后台解码出 unionId
 
             this.globalData.userInfo = res.userInfo; // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -139,7 +145,9 @@ Page({
           });
         }
       });
-    }
+    };
+    console.log('userInfo');
+    console.log(this.data.userInfo);
   },
   //上传电话号码
   tel_up: function (e) {
@@ -187,13 +195,13 @@ Page({
   },
   grade_input_open: function (e) {
     var index = e.currentTarget.dataset.key;
-        let that = this;
-        that.setData({
-            grade_input: true,
-            curtain_black_top: true,
-            now_input: index,
-            curtain_ani: true
-        });
+    let that = this;
+    that.setData({
+      grade_input: true,
+      curtain_black_top: true,
+      now_input: index,
+      curtain_ani: true
+    });
   },
   university_input_open: function (e) {
     let that = this;
@@ -226,7 +234,7 @@ Page({
         that.setData({
           [form_grade]: form_grade_fake
         });
-        // that.up_data(); //上传分数
+        that.up_data(); //上传分数
       } else if (index == "university_close") {
         var search = e.currentTarget.dataset.search;
         if (search == "true")
@@ -311,25 +319,15 @@ Page({
     });
 
     let that = this;
-
-    // _my.request({
-    //   url: app.globalData.url + "/Me_gaokao.php",
-    //   data: {
-    //     my_userid: app.globalData.userid,
-    //     mk_onegrade: that.data.Bubble[0].grade,
-    //     mk_twograde: that.data.Bubble[1].grade,
-    //     mk_thrgrade: that.data.Bubble[2].grade,
-    //     mz_oneschool: that.data.mywish,
-    //     mz_twoschool: -1,
-    //     mz_thrschool: -1,
-    //     my_mobilePhoneNumber: that.data.tel
-    //   },
-    //   header: {
-    //     "content-type": "application/json"
-    //   },
-    //   method: "GET",
-    //   success: function (res) {
-    //     console.log(res.data);
+    my.fncontext.callFunction({
+      name: "up_data",
+      data: {
+        user_data: that.data
+      },
+      success: res => {
+        console.log('up data success');
+      },
+    })
 
     _my.hideLoading();
     //   }
@@ -341,7 +339,7 @@ Page({
       title: "数据加载中",
       mask: true
     });
-    console.log('userid');
+    console.log('userid type');
     console.log(typeof this.data.userid);
 
     let that = this;
@@ -382,37 +380,6 @@ Page({
       },
     })
 
-    // _my.request({
-    //   url: app.globalData.url + "/Me_gaokao2.php",
-    //   data: {
-    //     my_userid: app.globalData.userid
-    //   },
-    //   header: {
-    //     "content-type": "application/json"
-    //   },
-    //   method: "GET",
-    //   success: function (res) {
-    //     var Bubble_list = res.data;
-    //     var onegrade = "Bubble[0].grade";
-    //     var twograde = "Bubble[1].grade";
-    //     var thrgrade = "Bubble[2].grade";
-    //     if (res.data != -1)
-    //       that.setData({
-    //         [onegrade]: Bubble_list["mk_onegrade"],
-    //         [twograde]: Bubble_list["mk_twograde"],
-    //         [thrgrade]: Bubble_list["mk_thrgrade"],
-    //         mywish: Bubble_list["mz_oneschool"],
-    //         tel: Bubble_list["my_mobilePhoneNumber"]
-    //       });
-    //     else
-    //       that.setData({
-    //         [onegrade]: -1,
-    //         [twograde]: -1,
-    //         [thrgrade]: -1,
-    //         mywish: -1,
-    //         tel: -1
-    //       });
-
     my.hideLoading();
     //   }
     // });
@@ -423,14 +390,15 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+    that.onLaunch();
     that.setData({
       userid: app.globalData.userid
     });
     that.little_rise();
     that.Bubble_move();
+    
     that.user_set();
-    that.onLaunch();
-
+    
     // 这里不是同步顺序执行，导致了userid来不及更新
     that.search();
   },
@@ -452,6 +420,13 @@ Page({
       that.setData({
         wish_up: false
       });
+    };
+    this.user_set();
+    console.log('hasuser');
+    console.log(that.data.hasUserInfo);
+    if(this.data.hasUserInfo){
+      console.log('get onloauch in show');
+      that.onLaunch();
     }
   },
 
