@@ -1,0 +1,24 @@
+<view class='container' ref='saveChildRef0'>
+  <view class='son_title'>
+    <view class='title_name'>
+      专业名
+    </view>
+    <view class='title_code'>
+      <icon class='fa fa-star-o fa-lg'>
+      </icon>
+      <text>
+        专业代码      </text>
+    </view>
+  </view>  <view class='son_list'>
+    <view class='major_son' a:for='{{major}}' data-key='{{index}}' ref-numbers='{{major}}' onTap='antmoveAction' data-antmove-tap='major_watch'>
+      <view class='son_name'>
+        {{item.name}}
+      </view>
+      <view class='son_code'>
+        <text>
+          {{item.code}}        </text>
+      </view>      <icon class='fa fa-chevron-right fa-lg'>
+      </icon>
+    </view>
+  </view>
+</view>

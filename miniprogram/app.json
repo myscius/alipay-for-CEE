@@ -1,6 +1,20 @@
 {
   "pages": [
     "pages/index1/index1",
+    "pages/major_watch/major_watch",
+    "pages/province_line/province_line",
+    "pages/admission_line/admission_line",
+    "pages/twobest/twobest",
+    "pages/mine/index",
+    "pages/major_watch_son/major_watch_son",
+    "pages/major_inc/major_inc",
+    "pages/college_search/college_search",
+    "pages/college/college",
+    "pages/college_major/college_major",
+    "pages/psychology_inc/psychology_inc",
+    "pages/out/out",
+    "pages/college_inc/collrgr_inc",
+    "pages/index1/index1",
     "pages/index/index",
     "pages/helloworld/helloworld",
     "pages/index3/index3",
@@ -16,7 +30,7 @@
   ],
   "window": {
     "titleBarColor": "#ED5276",
-    "defaultTitle": "支付宝云开发"
+    "defaultTitle": "高考志愿小助手"
   },
   "tabBar": {
     "textColor": "#dddddd",
@@ -30,17 +44,17 @@
         "activeIcon": "/image/tab/home-1.png"
       },
       {
-				"pagePath": "pages/colleges/index",
-				"name": "高校介绍",
-				"icon": "/image/tab/hat-0.png",
-				"activeIcon": "/image/tab/hat-1.png"
-			},
-			{
-				"pagePath": "pages/mine/index",
-				"name": "我的",
-				"icon": "/image/tab/me-0.png",
-				"activeIcon": "/image/tab/me-1.png"
-			}
+        "pagePath": "pages/college_inc/collrgr_inc",
+        "name": "高校介绍",
+        "icon": "/image/tab/hat-0.png",
+        "activeIcon": "/image/tab/hat-1.png"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "name": "我的",
+        "icon": "/image/tab/me-0.png",
+        "activeIcon": "/image/tab/me-1.png"
+      }
     ]
   }
 }

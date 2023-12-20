@@ -68,10 +68,11 @@ Page({
       }
   ]
   },
-  major_son_watch(){
+  major_son_watch(e){
+    var index = e.currentTarget.dataset.key;
     my.navigateTo(
       {
-        url:                "../major_watch_son/major_watch_son?code=" +
+        url:"../major_watch_son/major_watch_son?code=" +
         this.data.major[index].id
       }
     )

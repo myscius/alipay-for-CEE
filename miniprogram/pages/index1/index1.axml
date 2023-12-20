@@ -1,16 +1,18 @@
+<!--<view><image mode="scaleToFill" src="miniprogram/image/crown.png" /></view> -->
+<view class="sad">
+  <image class='sad1' src="/image/图片1.png" />
+</view>
 <view id='container' ref='saveChildRef0'>
   <view id='index_semicircle'>
   </view>
   <view id='index_greet'>
     <view id='greet_date'>
-      <!-- <view id='date_date'>
-        {{now_year}}/{{now_month}}/{{now_date}}
-      </view> -->
-      <!-- <view id='date_day'>
-        {{time}}
-      </view> -->
+      <!--<view id='date_date'>
+        {{now_year}}/{{now_month}}/{{now_date}}</view> -->
+      <!--<view id='date_day'>
+        {{time}}</view> -->
       <view id='date_testend'>
-        {{time+' '+'离高考还有'+timecha+'天'}}
+        {{time+' '+'离填报高考志愿还有'+timecha+'天'}}
       </view>
     </view>
     <view id='greet_pic'>
@@ -25,42 +27,141 @@
       </view>
     </view>
   </view>
-  <view a:if="{{showInputBox}}" class="page-mask" >
+  <view a:if="{{showInputBox}}" class="page-mask">
     <view class="input-box">
-      <input placeholder="请输入内容" value="{{inputValue}}" onInput="inputChange"></input>
-      <button onTap="submitInput">提交</button>
+      <input placeholder="请输入大学关键字" value="{{inputValue}}" onInput="inputChange"></input>
+      
+        <button class="bu" onTap="submitInput">提交</button>
+        <button class="bu" onTap="cancel">取消</button>
+
+
     </view>
   </view>
-</view>  <view class="index_navigation  {{index_navigation_slide==true?'index_navigation_slide':''}}">
-  <view class="navigation_son {{navigation_shadow[0].start==true?'shadow_university':''}}" id='navigation_university' data-key='0' onTap='antmoveAction0' data-antmove-tap='navigation_shadow_open'>
+
+
+</view>
+
+<view id='index_form' onTap="ifopen">
+  <view id='form_greet'>
+    初次见面，先告诉我你的名次吧
+  </view>
+</view>
+<view a:if="{{ open }}" class="container1">
+  <icon  type="search" />
+  <ant-input
+    placeholder="请输入高考名次"
+    onChange="onChange"
+    className="search-bar"
+    focusClassName="search-bar-focus"
+    confirm-type="search"
+    allowClear
+    focus
+    onConfirm="onConfirm"
+  >
+
+  </ant-input>
+</view>
+
+<view a:if="{{ open }}" class="page-section">
+  <picker onChange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="row">
+      <view class="row-title">所在省份</view>
+      <view class="row-extra">当前选择：{{array[index]}}</view>
+    </view>
+  </picker>
+</view>
+<view a:if="{{ open }}" class="page-section">
+  <picker onChange="bindPickerChange1" value="{{index1}}" range="{{array1}}">
+    <view class="row">
+      <view class="row-title">文理科</view>
+      <view class="row-extra">当前选择：{{array1[index1]}}</view>
+    </view>
+  </picker>
+</view>
+<button a:if="{{ open }}" class="button1" hover-class="button2" type="primary" size="mini" onTap="search">
+  <text style="color:white">查询</text>
+</button>
+<view class="index_navigation  {{index_navigation_slide==true?'index_navigation_slide':''}}">
+  <view
+    class="navigation_son {{navigation_shadow[0].start==true?'shadow_university':''}}"
+    id='navigation_university'
+    data-key='0'
+    onTap='antmoveAction0'
+    data-antmove-tap='navigation_shadow_open'
+  >
     <icon class='fa fa-fort-awesome fa-lg'>
     </icon>
     <text class='navigation_son_word'>
-      查大学      </text>
-  </view>    <view class="navigation_son {{navigation_shadow[1].start==true?'shadow_major':''}}" id='navigation_major' url=" " open-type='switchTab' data-key='1' onTap='antmoveAction' >
+      查大学
+    </text>
+  </view>
+  <view
+    class="navigation_son {{navigation_shadow[1].start==true?'shadow_major':''}}"
+    id='navigation_major'
+    url=" "
+    data-key='1'
+    onTap='antmoveAction2'
+  >
     <icon class='fa fa-book fa-lg'>
     </icon>
     <text class='navigation_son_word'>
-      看专业      </text>
-  </view>    <view class="navigation_son {{navigation_shadow[2].start==true?'shadow_provincialcontrolline':''}}" id='navigation_provincialcontrolline' url=" " open-type='switchTab' data-key='2' onTap='antmoveAction1' >
+      看专业
+    </text>
+  </view>
+  <view
+    class="navigation_son {{navigation_shadow[2].start==true?'shadow_provincialcontrolline':''}}"
+    id='navigation_provincialcontrolline'
+    url=" "
+    open-type='switchTab'
+    data-key='2'
+    onTap='antmoveAction1'
+  >
     <icon class='fa fa-server fa-lg'>
     </icon>
     <text class='navigation_son_word'>
-      省控线      </text>
-  </view>    <view class="navigation_son {{navigation_shadow[3].start==true?'shadow_psychology':''}}" id='navigation_psychology' url=" " open-type='switchTab' data-key='3' onTap='antmoveAction'>
+      省控线
+    </text>
+  </view>
+  <view
+    class="navigation_son {{navigation_shadow[3].start==true?'shadow_psychology':''}}"
+    id='navigation_psychology'
+    url=" "
+    open-type='switchTab'
+    data-key='3'
+    onTap='antmoveAction3'
+  >
     <icon class='fa fa-user-md fa-lg'>
     </icon>
     <text class='navigation_son_word'>
-      心理测试      </text>
-  </view>    <view class="navigation_son {{navigation_shadow[4].start==true?'shadow_admissionsline':''}}" id='navigation_admissionsline' url=" " open-type='switchTab' data-key='4' onTap='antmoveAction4' >
+      心理测试
+    </text>
+  </view>
+  <view
+    class="navigation_son {{navigation_shadow[4].start==true?'shadow_admissionsline':''}}"
+    id='navigation_admissionsline'
+    url=" "
+    open-type='switchTab'
+    data-key='4'
+    onTap='antmoveAction4'
+  >
     <icon class='fa fa-bar-chart fa-lg'>
     </icon>
     <text class='navigation_son_word'>
-      录取线      </text>
-  </view>    <view class="navigation_son {{navigation_shadow[5].start==true?'shadow_twobest':''}}" id='navigation_twobest' url=" " open-type='switchTab' data-key='5' onTap='antmoveAction5' >
+      录取线
+    </text>
+  </view>
+  <view
+    class="navigation_son {{navigation_shadow[5].start==true?'shadow_twobest':''}}"
+    id='navigation_twobest'
+    url=" "
+    onTap='antmoveAction5'
+    data-key='10'
+    date-arr='6'
+  >
     <icon class='fa fa-flag fa-lg'>
     </icon>
     <text class='navigation_son_word'>
-      双一流      </text>
+      双一流
+    </text>
   </view>
 </view>

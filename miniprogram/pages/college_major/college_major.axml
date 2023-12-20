@@ -1,0 +1,50 @@
+<view class='container' ref='saveChildRef0'>
+  <view class='recommend_num'>
+    <view class='human_bottom block_shock'>
+    </view>
+    <view class='human_top '>
+      <icon class='fa fa-child fa-lg '>
+      </icon>
+    </view>
+    <view class='recommend_word'>
+      我们为您找到了一共{{num}}所大学
+    </view>
+  </view>
+  <view class='admissionsline_option'>
+    <view class='option_area'>
+      {{province}}
+    </view>
+    <view class='option_arrangement'>
+      {{direction}}
+    </view>
+    <!--<icon
+        class='fa fa-search fa-lg fa-search_option'
+        onTap='antmoveAction'
+        data-antmove-tap='search11'
+      ></icon> -->
+  </view>
+  <view class='major_line'>
+    <view class='row'>
+      <view class='row_name'>
+        大学名称
+      </view>
+      <view class='row_avn'>
+        最低分
+      </view>
+      <view class='row_level'>
+        最低名次
+      </view>
+    </view>
+    <view a:for='{{major}}' class='row_grade' ref-numbers='{{major}}'>
+      <view class='grade_name'>
+        {{item.name}}
+      </view>
+      <view class='grade_avn'>
+        {{item.score}}
+      </view>
+      <view class='grade_level'>
+        {{item.rank}}
+      </view>
+    </view>
+  </view>
+</view>

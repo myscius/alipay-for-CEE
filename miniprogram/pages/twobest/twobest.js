@@ -19,6 +19,7 @@ Page({
         height_W: 0,
         listshow: false,
         collegea:true,
+        lq:'',
         college_A: [
             {
                 front: "",
@@ -1672,58 +1673,6 @@ Page({
             now_inc: !inc
         });
     },
-    // curtain_close: function(e) {
-    //     var index = e.currentTarget.dataset.key;
-    //     let that = this;
-    //     that.setData({
-    //         curtain: false
-    //     });
-    //     if (that.data.now_inc)
-    //         that.setData({
-    //             major_open: false
-    //         });
-    //     else
-    //         that.setData({
-    //             college_open: false
-    //         });
-    // },
-    // major_slide: function(e) {
-    //     let that = this;
-    //     var index = e.currentTarget.dataset.key;
-    //     var jump_index = index - 1;
-    //     var spread = "college_major[" + index + "].spread";
-    //     var slide = "college_major[" + index + "].slide";
-    //     var now_index = that.data.now_index;
-
-    //     if (that.data.now_index != index) {
-    //         if (now_index == -2) now_index = 0;
-
-    //         if (now_index != -1) {
-    //             var spread_last = "college_major[" + now_index + "].spread";
-    //             var slide_last = "college_major[" + now_index + "].slide";
-    //             that.setData({
-    //                 [spread_last]: false,
-    //                 [slide_last]: false
-    //             });
-    //         }
-
-    //         that.setData({
-    //             toView: "major_son" + jump_index + "",
-    //             now_index: index,
-    //             [spread]: true,
-    //             [slide]: true
-    //         });
-    //     }
-    // },
-    // i_flashes: function(e) {
-    //     let that = this;
-    //     var index = e.currentTarget.dataset.key;
-    //     var spread = "college_major[" + index + "].spread";
-    //     var spread_bool = that.data.college_major[index].spread;
-    //     that.setData({
-    //         [spread]: !spread_bool
-    //     });
-    // },
     //科目切割
     major_name: function(e) {
         let that = this;
@@ -1742,7 +1691,7 @@ Page({
             major_list: major_list_fake
         });
 
-        _my.hideLoading();
+        my.hideLoading();
     },
     list_show(e){
       var i=e.currentTarget.dataset.key;
@@ -1803,17 +1752,22 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        _my.showLoading({
-            title: "数据加载中",
+        my.showLoading({
+            content: "数据加载中",
             mask: true
         });
 
         var that = this;
         that.setData({
-            height_W: _my.getSystemInfoSync().windowHeight
+            height_W: _my.getSystemInfoSync().windowHeight,
+            lq:options.code
+            
         });
+        console.log(options.code);
         that.college_name();
         that.major_name();
+        
+
     },
 
     /**

@@ -6,19 +6,37 @@
     <icon class='fa fa-refresh fa-lg'>
     </icon>
   </view>
+  <!-- <view>
+    加一个弹窗
+  </view> -->
+  <view a:if="{{showInputBox}}" class="page-mask" >
+    <view class="input-box">
+      <input placeholder="请输入正确的大学名称" value="{{inputValue}}" onInput="inputChange"></input>
+      <button class="bu" onTap="submitInput">提交</button>
+      <button class="bu" onTap="cancel">取消</button>
+    </view>
+  </view>
   <view class='province_line'>
     <view class='admissionsline_option'>
       <picker class='option_area' mode='selector' range='{{province_list}}' onChange='province_change'>
-        {{province}}
+        <view>
+          {{province}}
+        </view>
       </picker>
       <picker class='option_type' mode='selector' range='{{type_list}}' onChange='type_change'>
-        {{type}}
+        <view>
+          {{type}}
+        </view>
       </picker>
       <picker class='option_arrangement' mode='selector' range='{{arrangement_list}}' onChange='arrangement_change'>
-        {{arrangement}}
+        <view>
+          {{arrangement}}
+        </view>        
       </picker>
-      <icon class='fa fa-search fa-lg fa-search_option' onTap='antmoveAction' data-antmove-tap='search'>
-      </icon>
+      <view onTap='antmoveAction' data-antmove-tap='search'>
+        <icon class='fa fa-search fa-lg fa-search_option' onTap='antmoveAction' data-antmove-tap='search'>
+        </icon>
+      </view>
     </view>
   </view>
   <view class='college_grade'>

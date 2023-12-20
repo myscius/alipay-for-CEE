@@ -1,0 +1,19 @@
+const AlipaySdk = require("alipay-sdk");
+exports.main = async (event, context) => {
+  var code=''+event.code;
+
+
+  const alipaySdk = new AlipaySdk({
+    appId: "2021004127602016",
+    privateKey: "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCEsOiZ+yCIhWgGLjc04y9vhTMxZX7uh+x6+L0ao0BdPF8TOVUkZwOKdl+GzAjGolepjh6FQ396NCaLKkcDCWWPx02VTw+xrRczCTszCriUsrhsbUsRZt942k2/nMNjn7GpuFA/Ik3pxnUrdDmb/D3qQUe9i0aufc36g9bQgnDcS3pPC6MF+NerZrd1UItSumuI8EscsZHFhITTNBjEIa+LuP8556qsVMZb8hUgL0BiA/4rA4fk7O+IkSrVlcByurqWJj4JDmscpylzoerLY/1oab5qns9gvtYHPNw4Q5JDKRYcZgPiOgBA1wdsHzRl42ZQvn09P7bUV4ksiNJ3Qdm/AgMBAAECggEATRdrTGr2z9qSQWUAdh24JZbB02Ughf06i4eQdrV6Y7D7m/OnX+rpx7xWa76HKsCPJdeIK+y3V4yNCDWb5EvFUe99R84TVCs4W1J1roYAD4R2Wah2ALpAA7rxiO3PJ0ZUtkJ7fPK1Sakf0gtInTPD1SHwSFNu0VoOHgoS+DmQ0Ku7XM/LV/S3dvgmrG6X5aGhu4xLElH+2wZSr9UftDYnUQCzFTEAOMhDrmSxSliOJNvfVACMJ/lHEL0fksXCfuYCByGoXJTCvQ6uersTRf+9DQKrI1sEkwgKoQ//p+bPk5UvroqzhXve9/e0pY/KmTWsfo1Uh9H8ipNMQ5LSC9CZYQKBgQDxzfHYhWOu5iw4jDkoYIbUabQ9EQiGr4xhewtBy5w62Z4M8YBtGeJ0tsvxrKCP8mlUEb+Co+aPYEtpxV1hpODfzGo+jnFH/4Mrhjm3NOW7hDlmSosBRO3+AYqDjWcYOTxqplJAAj/0KhB7pA06Ig8Ipx9ZiDi/7EZHZ5PBNw5UlQKBgQCMexvxA/v6MV7DnqQy92iaEob2eB1uShTEqhsFAO0wA+N24eJnU2ecttDHxxORLRUwupMBgyWGXAqWD6xhdk8au7mUuSkmVC6lFp/blbhM1P7wkkeoCluTn9wiV9L8ni8FbA6Irk7yfMPTXRyLst8O3OU69lyXWY81FUtpashsAwKBgFz8J05uLSEq3kJ4mdpPFEpGw8rf6/lvNHqgCHoqxE9VNBQiIpLR62Wajd7H1Y7FV3++u3iPcrAcBaQNA5XzA47MWubne+SF+3kXSsaLDvUHKdOOQtogGa0eBpgEHmsQR41znBmFQ/au3lvNgFCknEdljQau/bPANl5rFESu2VHpAoGAJQge6X3fYqi5DmA3cKf/jv3rTfWD7JritqUQ0lTYMZwUzjXldM9rtMgMaV11LwPvXhUQw4lKzwxcTgp7qoWBfM6XsTjOPChc03APW9cv6jELs2ccNJPmaBfv862rFKSuSIOfoTAx54I0LPeSmtDgNA7O7qga6FrXgWrHolZf1vkCgYAVsUig98FNg04QZlmDOoYP5k2SxadkjKHEb9I0JfQAo49RJjSm5Hyrv/F2Idk3VIfrWVYZrQ7nGXlukQAj9+QJJdfrdrB3L+qOgY45Jtk8CYrWTYM37lEtcISJZpyt1X/N2M1j2v+jarAfxjXGiCEH40dSTx1v8+FLmCVYhSz4Ew==",
+    alipayPublicKey: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnjucunmtis2+rZ3WXFgQrO2uhzMcvXGaEZekgl/lwjrcQw3S20tycZeLvvnsJLB89leZW08Zivdd/yLN6sS4M02/2YvPnr3QOA4dEzMbHrDGXfNSeERTkh+wdyfOp8QgtaErUQ54vd+FrdVhq66l3dQlwsF/25O0UdWIgbYY6RYOid4ma/ZKbwPw65ElnMES+Wlo9aMr2aW/vUmKhvLmSMIETRqZ0fxHr93g3m/5YwiDbAuQijJHq34pNLF5Vqdsw9vs9W8TkuoE71oxqMCWQwPbbSTzfKQJSQh8eAg6QLJ+zBFantoDGT71DoV/+omEy9WDMif6PPz4yFEjO6vtVQIDAQAB",
+    gateway: "https://openapi.alipay.com/gateway.do",
+  });
+  const result = await alipaySdk.exec("alipay.system.oauth.token", {
+    code: code,
+    grant_type: "authorization_code",
+    
+  });
+  return result;
+  
+};

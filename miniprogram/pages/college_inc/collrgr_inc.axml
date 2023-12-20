@@ -1,0 +1,95 @@
+<view class='page-container-classname'>
+    <view class='inc_change'>
+      <view class='change_college' text-align='center'>
+        <icon class='fa fa-fort-awesome' text-align='center'>
+        </icon>
+        <text text-align='center'>
+          高校介绍
+        </text>
+      </view>
+    </view>
+    <view class='college_search '>
+      <input class='search_input' placeholder='输入目标高校关键字' value="{{inputValue}}" onInput='keyword_set'>
+      </input>
+      <view class='search_button' onTap='antmoveAction' data-antmove-tap='college_search'>
+        <icon class='fa fa-search fa-lg'>
+        </icon>
+      </view>
+        </view>
+        <view class='college_inc'>
+          <view
+            a:for='{{college_data}}'
+            class='inc_son'
+            data-id='{{item.id}}'
+            ref-numbers='{{college_data}}'
+            onTap='antmoveAction'
+            data-antmove-tap='jump_school'
+          >
+            <movable-area class='zone_s'>
+              <movable-view
+                class='son_out'
+                direction='horizontal'
+                disabled="{{touch_all || college_data[index].touch==true?'':'true'}}"
+                x='{{college_data[index].x}}'
+                data-key='{{index}}'
+                onChange='movable_view'
+                onTouchEnd='antmoveAction'
+                data-antmove-touchend="{{college_data[index].direction==true?'movable_end_right':'movable_end_left'}}"
+                onTouchStart='antmoveAction'
+                data-antmove-touchstart='movable_start'
+              >
+                <view class='out_logo'>
+                  <image mode='aspectFill' src='{{item.logo}}'>
+                  </image>
+                </view>
+                <view class='out_name'>
+                  <text class='name_chinese'>
+                    {{item.name}}
+                  </text>
+                  <text class='name_english'>
+                    {{item.word}}
+                  </text>
+                </view>
+                <icon
+                  class="fa fa-chevron-circle-left fa-lg  {{college_data[index].flashes==true?'chevron_ani':''}} {{college_data[index].direction==true?'':'chevron_roate'}}"
+                  data-key='{{index}}'
+                  onAnimationend='i_flashes'
+                >
+                </icon>
+              </movable-view>
+            </movable-area>
+            <view class='son_in' style='background-image: url({{item.backimg}});'>
+              <view class='in_out'>
+              </view>
+              <view class='in_information'>
+                <view class='information_arrangement information'>
+                  <view class='front'>
+                    学历层次
+                  </view>
+                  <view class='behind'>
+                    {{item.level==0?'本科一批':''}}{{item.level==1?'本科二批':''}}{{item.level==2?'本科三批':''}}{{item.level==3?'专科':''}}
+                  </view>
+                </view>
+                <view class='information_code information'>
+                  <view class='front'>
+                    学校代码
+                  </view>
+                  <view class='behind'>
+                    {{item.code}}
+                  </view>
+                </view>
+                <view class='information_address information'>
+                  <view class='front'>
+                    院校所属省市
+                  </view>
+                  <view class='behind'>
+                    {{item.addres}}
+                  </view>
+                </view>
+              </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view a:if='{{curtain}}' class='curtain'>
+</view>

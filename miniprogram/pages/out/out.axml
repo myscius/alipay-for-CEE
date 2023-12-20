@@ -1,0 +1,4 @@
+<text style='color:#ff0000;' ref='saveChildRef0'>
+  <web-view src='{{url}}/'>
+  </web-view>
+</text>

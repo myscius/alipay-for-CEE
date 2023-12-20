@@ -173,3 +173,26 @@
 .fa-refresh {
   font-size: 45rpx;
 }
+
+.page-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 设置蒙层的颜色和透明度 */
+  z-index: 999; /* 设置蒙层的层级 */
+}
+
+.input-box{
+  margin-top: 200px;
+  border-style: solid;
+  border-color: #84fab0;
+  background-color: #8fd3f4;
+
+}
+
+.bu{
+  width: 50%;
+  display:inline-block;
+}

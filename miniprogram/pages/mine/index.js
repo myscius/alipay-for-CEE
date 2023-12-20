@@ -436,6 +436,7 @@ Page({
     });
     // set userid
     that.getuserid();
+    app.globalData.userid = that.userid;
     that.onLaunch();
     that.little_rise();
     that.Bubble_move();
@@ -472,7 +473,9 @@ Page({
     if (this.data.hasUserInfo) {
       console.log('get onloauch in show');
       that.onLaunch();
-    }
+    };
+    console.log('app id');
+    console.log(app.globalData.userid);
   },
 
   /**

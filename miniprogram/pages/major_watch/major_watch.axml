@@ -1,6 +1,6 @@
 <view class='container' ref='saveChildRef0'>
   <view class='watch_list'>
-    <view class='list_major' a:for='{{major}}' id='major{{index+1}}' data-key='{{index}}' ref-numbers='{{major}}' onTap='antmoveAction' data-antmove-tap='major_son_watch'>
+    <view class='list_major' a:for='{{major}}' id='major{{index+1}}' data-key='{{index}}' ref-numbers='{{major}}' onTap='major_son_watch'>
       <view class='curtain'>
       </view>
       <view class='major_name'>

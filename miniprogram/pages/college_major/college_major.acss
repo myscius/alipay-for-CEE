@@ -1,0 +1,119 @@
+/* pages/college_major/college_major.wxss */
+
+#container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 750rpx;
+  margin-bottom: 300rpx;
+}
+
+.admissionsline_option {
+  margin-top: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 35rpx;
+  color: #fad68a;
+  width: 650rpx;
+}
+
+.admissionsline_option view,
+.admissionsline_option picker {
+  display: inline-block;
+  border-top: 1px solid #fad68a;
+  border-bottom: 1px solid #fad68a;
+  width: 150rpx;
+  text-align: center;
+  padding: 15rpx 0;
+}
+
+.admissionsline_option i {
+  display: inline-block;
+}
+
+.major_line {
+  width: 750rpx;
+  margin-top: 50rpx;
+}
+
+.row,
+.row_grade {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fad68a;
+  color: #fff;
+  font-size: 35rpx;
+  height: 60rpx;
+}
+
+.row_grade {
+  color: #6b6a6a !important;
+  background: #fff;
+  height: 70rpx;
+}
+
+.row_name,
+.grade_name {
+  width: 400rpx;
+  text-align: center;
+}
+
+.row_avn,
+.grade_avn {
+  width: 150rpx;
+  text-align: center;
+}
+
+.row_level,
+.grade_level {
+  width: 200rpx;
+  text-align: center;
+}
+
+.recommend_num {
+width: 750rpx;
+background: #ffd57e;
+position: relative;
+height: 90rpx;
+color: #fff;
+margin-top: 80rpx;
+}
+
+.human_bottom {
+position: absolute;
+width: 120rpx;
+height: 150rpx;
+background: #f4c668;
+top: -30rpx;
+left: 40rpx;
+z-index: -1;
+}
+
+.human_top {
+position: absolute;
+width: 120rpx;
+height: 150rpx;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 60rpx;
+top: -30rpx;
+left: 40rpx;
+}
+
+.recommend_word {
+height: 90rpx;
+display: flex;
+align-items: center;
+margin-left: 160rpx;
+font-size: 35rpx;
+letter-spacing: 1px;
+}
+
+
+.block_shock {
+animation: block_shock 1s forwards;
+}
+
