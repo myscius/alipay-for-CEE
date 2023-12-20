@@ -52,13 +52,14 @@ Page({
       my.fncontext.callFunction({
         name: "login",
         data: {
-          nickName: that.data.userInfo.nickName
+          nickName: that.data.userInfo.nickName,
+          userid:that.data.userid
         },
         success: res => {
           console.log('login')
-          that.setData({
-            userid: res.result
-          });
+          // that.setData({
+          //   userid: res.result
+          // });
           console.log('login res');
           console.log(res);
 
@@ -86,11 +87,11 @@ Page({
               mywish: -1,
               tel: -1
             });
-            my.hideLoading();
+          my.hideLoading();
         },
       })
     };
-    
+
   },
   check_user: function (e) {
     var that = this;
@@ -339,6 +340,34 @@ Page({
     //   }
     // });
   },
+
+  // get userid
+  async getuserid() {
+    let that = this;
+    my.getAuthCode({
+      scopes: 'auth_base',
+      success: res => {
+        const authCode = res.authCode;            
+        console.log('authcode:') 
+        console.log(authCode)
+
+        my.fncontext.callFunction({
+          name: 'getuserid',
+          data: {
+            code: authCode
+          },
+          success: res => {
+            that.setData({
+              userid:res.result.alipayUserId
+            });
+
+            console.log('userid')
+            console.log(that.data.userid);
+          }
+        })
+      }
+    })
+  },
   //向后台请求数据
   search: function (e) {
     my.showLoading({
@@ -400,21 +429,23 @@ Page({
       title: "数据加载中",
       mask: true
     });
-    setTimeout( "", 3000);
-    
+    setTimeout("", 3000);
+
     that.setData({
       userid: app.globalData.userid
     });
+    // set userid
+    that.getuserid();
     that.onLaunch();
     that.little_rise();
     that.Bubble_move();
-    
+
     that.user_set();
-    
+
     // 这里不是同步顺序执行，导致了userid来不及更新
     that.search();
     my.hideLoading();
-    
+
   },
 
   /**
@@ -438,7 +469,7 @@ Page({
     this.user_set();
     console.log('hasuser');
     console.log(that.data.hasUserInfo);
-    if(this.data.hasUserInfo){
+    if (this.data.hasUserInfo) {
       console.log('get onloauch in show');
       that.onLaunch();
     }

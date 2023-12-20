@@ -28,7 +28,7 @@ exports.main = async (event, context) => {
       my_mobilePhoneNumber: event.user_data.tel,
     },
     {
-      where: { user_name: event.user_data.userInfo.nickName },
+      where: { password: event.user_data.userid },
     },
   );
   console.log(`成功更新 ${updated.affectedRows} 条数据`);

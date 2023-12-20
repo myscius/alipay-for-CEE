@@ -28,14 +28,14 @@ exports.main = async (event, context) => {
     ') ENGINE=InnoDB;'
   );
 
-  const search_user = await mysql.query('SELECT * FROM user_login WHERE user_name = ?', [event.nickName]);
+  const search_user = await mysql.query('SELECT * FROM user_login WHERE password = ?', [event.userid]);
   if (search_user.length < 1) {
     // 向 user 表插入数据
     const userName = getUserName();
     const inserted =  mysql.insert('user_login', {
       user_name: event.nickName,
       description: 'user',
-      password: crypto.randomBytes(10).toString('hex'),
+      password: event.userid,
       mk_onegrade: -1,
       mk_twograde: -1,
       mk_thrgrade: -1,
