@@ -1695,7 +1695,7 @@ Page({
     },
     list_show(e){
       var i=e.currentTarget.dataset.key;
-      console.log(i)
+      // console.log(i)
       let that=this;
       const newList = [...this.data.college_major];
       var a=that.data.college_major[i].spread;

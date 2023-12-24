@@ -41,6 +41,10 @@ Page({
               mywish: that.data.target,
               wish_up: true
           });
+                    // console.log(that.data.mywish+'sd')
+          prevPage.up_data();
+        //  console.log(prevPage.data.mywish+'sd')
+          // prevPage.up_data();
 
           _my.navigateBack({
               delta: 1
@@ -118,41 +122,92 @@ Page({
         }
     },
     async search1(e){
+      my.showLoading({
+        content:'加载中',
+        mask:true
+      })
       let that=this;
-      var schname=e.detail.value;
-      // console.log(schname)
-      var context = await my.getCloudContext();
-            context.callFunction({
-              name:'college_search',
-              data:{
-                name:this.data.collegename
-              },
-              success: function(res){
-                console.log(res)
-                var college_list = res.result;
-                var length = college_list.length;
-                var college_fake = new Array();
+      if (this.data.collegename) {
 
-                for (var i = 0; i < length; i++) {
-                    var myArray = {
-                        color: -1,
-                        shock: false,
-                        code: college_list[i]["id"],
-                        name: college_list[i]["name"]
-                    };
-                    college_fake.push(myArray);
-                }
+        var context = await my.getCloudContext();
+        context.callFunction({
+          name:'college_search',
+          data:{
+            name:this.data.collegename
+          },
+          success: function(res){
+            // console.log(res)
+            var college_list = res.result;
+            var length = college_list.length;
+            var college_fake = new Array();
 
-                that.setData({
-                    college: college_fake
-                });
-                that.rand_color();}})
+            for (var i = 0; i < length; i++) {
+                var myArray = {
+                    color: -1,
+                    shock: false,
+                    code: college_list[i]["id"],
+                    name: college_list[i]["name"]
+                };
+                college_fake.push(myArray);
+            }
+
+            that.setData({
+                college: college_fake
+            });
+            that.rand_color();
+            my.hideLoading();
+          }
+        })
+
+    }else{
+
+      my.hideLoading();
+      my.showToast({
+        mask:true,
+        content:'您未输入任何字段',
+        duration:2000
+      });
+    }
+
+      // var schname=e.detail.value;
+      // // console.log(schname)
+      // var context = await my.getCloudContext();
+      //       context.callFunction({
+      //         name:'college_search',
+      //         data:{
+      //           name:this.data.collegename
+      //         },
+      //         success: function(res){
+      //           // console.log(res)
+      //           var college_list = res.result;
+      //           var length = college_list.length;
+      //           var college_fake = new Array();
+
+      //           for (var i = 0; i < length; i++) {
+      //               var myArray = {
+      //                   color: -1,
+      //                   shock: false,
+      //                   code: college_list[i]["id"],
+      //                   name: college_list[i]["name"]
+      //               };
+      //               college_fake.push(myArray);
+      //           }
+
+      //           that.setData({
+      //               college: college_fake
+      //           });
+      //           that.rand_color();
+                // my.hideLoading();}})
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: async function(options) {
+      my.showLoading({
+        content:'加载中',
+        mask:true
+      })
         let that = this;
 
         if (options.source) {
@@ -172,7 +227,7 @@ Page({
                 name:options.college_name
               },
               success: function(res){
-                console.log(res)
+                // console.log(res)
                 var college_list = res.result;
                 var length = college_list.length;
                 var college_fake = new Array();
@@ -191,10 +246,20 @@ Page({
                     college: college_fake
                 });
                 that.rand_color();
+                my.hideLoading();
               }
             })
 
+        }else{
+
+          my.hideLoading();
+          my.showToast({
+            mask:true,
+            content:'您未输入任何字段',
+            duration:2000
+          });
         }
+
 
         // if (options.college_name) {
         //     that.search();

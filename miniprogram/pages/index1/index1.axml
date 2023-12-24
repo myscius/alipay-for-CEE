@@ -1,6 +1,6 @@
 <!--<view><image mode="scaleToFill" src="miniprogram/image/crown.png" /></view> -->
 <view class="sad">
-  <image class='sad1' src="/image/图片1.png" />
+  <image class='sad1' src="/image/photo1.png" />
 </view>
 <view id='container' ref='saveChildRef0'>
   <view id='index_semicircle'>
@@ -28,14 +28,21 @@
     </view>
   </view>
   <view a:if="{{showInputBox}}" class="page-mask">
-    <view class="input-box">
+    <view id='university_input'>
       <input placeholder="请输入大学关键字" value="{{inputValue}}" onInput="inputChange"></input>
-      
-        <button class="bu" onTap="submitInput">提交</button>
-        <button class="bu" onTap="cancel">取消</button>
-
-
+      <view class='fa fa-close fa-lg fa-close_university' onTap="cancel">
+      </view>
+      <view class='fa fa-search fa-lg fa-search_university' onTap="submitInput">
+      </view>
     </view>
+    <!-- <view class="input-box">
+      <input placeholder="请输入大学关键字" value="{{inputValue}}" onInput="inputChange"></input>
+
+      <button class="bu" onTap="submitInput">提交</button>
+      <button class="bu" onTap="cancel">取消</button>
+
+
+    </view> -->
   </view>
 
 
@@ -47,7 +54,7 @@
   </view>
 </view>
 <view a:if="{{ open }}" class="container1">
-  <icon  type="search" />
+  <icon type="search" />
   <ant-input
     placeholder="请输入高考名次"
     onChange="onChange"
@@ -78,7 +85,14 @@
     </view>
   </picker>
 </view>
-<button a:if="{{ open }}" class="button1" hover-class="button2" type="primary" size="mini" onTap="search">
+<button
+  a:if="{{ open }}"
+  class="button1"
+  hover-class="button2"
+  type="primary"
+  size="mini"
+  onTap="search"
+>
   <text style="color:white">查询</text>
 </button>
 <view class="index_navigation  {{index_navigation_slide==true?'index_navigation_slide':''}}">

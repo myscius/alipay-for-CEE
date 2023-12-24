@@ -40,15 +40,15 @@ Page({
   },
   onLaunch: function () {
     my.showLoading({
-      title: "数据加载中",
+      content: "数据加载中",
       mask: true
     });
     // login 此处应该使用支付宝授权登录
     let that = this;
-    console.log('luqi')
+    // console.log('luqi')
     if (that.data.hasUserInfo) {
-      console.log('nickName');
-      console.log(that.data.userInfo.nickName);
+      //  console.log('nickName');
+      //  console.log(that.data.userInfo);
       my.fncontext.callFunction({
         name: "login",
         data: {
@@ -56,17 +56,14 @@ Page({
           userid:that.data.userid
         },
         success: res => {
-          console.log('login')
           // that.setData({
           //   userid: res.result
           // });
           console.log('login res');
-          console.log(res);
+          // console.log(res);
 
           // 本应该是search的内容
           var user_data = res.result[0];
-          console.log('user_data')
-          console.log(user_data)
           // app.globalData.userInfo = res.userInfo;
           var onegrade = "Bubble[0].grade";
           var twograde = "Bubble[1].grade";
@@ -95,6 +92,8 @@ Page({
   },
   check_user: function (e) {
     var that = this;
+   
+
 
     _my.openSetting({
       success: res => {
@@ -127,6 +126,16 @@ Page({
     });
   },
   user_set: function (e) {
+  //   my.getOpenUserInfo({
+  //     success: (res) => {
+  //         let userInfo = JSON.parse(res.response).response
+  //         console.log('lq')
+  //         console.log(userInfo)
+  //     },
+  //     fail: (err) => {
+  //         console.log(err)
+  //     }
+  // });
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -153,14 +162,14 @@ Page({
         }
       });
     };
-    console.log('userInfo');
-    console.log(this.data.userInfo);
+    // console.log('userInfo');
+    // console.log(this.data.userInfo);
   },
   //上传电话号码
   tel_up: function (e) {
     let that = this;
 
-    _my.showModal({
+    my.showModal({
       title: "提示",
       content: "是否更改手机号码",
       success: function (res) {
@@ -220,7 +229,7 @@ Page({
     });
   }, // 点击输入我的志愿
   grade_input_close: function (e) {
-    console.log("grade_input_close")
+    // console.log("grade_input_close")
     let that = this;
     var index = e.currentTarget.dataset.key;
     this.setData({
@@ -250,6 +259,8 @@ Page({
               that.data.mywish_fake +
               "&source=me"
           });
+          // console.log(that.data.mywish+'sd')
+          // that.up_data();
       }
     }, 300); //解除禁止操作
   },
@@ -320,8 +331,8 @@ Page({
   },
   //上传信息
   up_data: function (e) {
-    _my.showLoading({
-      title: "数据加载中",
+    my.showLoading({
+      content: "数据加载中",
       mask: true
     });
 
@@ -340,6 +351,13 @@ Page({
     //   }
     // });
   },
+  // antmoveAction1(){
+  //   app.globalData.userInfo=''
+  //   this.setData({
+  //    hasUserInfo:false
+  //   })
+
+  // },
 
   // get userid
   async getuserid() {
@@ -348,8 +366,8 @@ Page({
       scopes: 'auth_base',
       success: res => {
         const authCode = res.authCode;            
-        console.log('authcode:') 
-        console.log(authCode)
+        // console.log('authcode:') 
+        // console.log(authCode)
 
         my.fncontext.callFunction({
           name: 'getuserid',
@@ -357,12 +375,13 @@ Page({
             code: authCode
           },
           success: res => {
+            app.globalData.userid=res.result.alipayUserId;
             that.setData({
               userid:res.result.alipayUserId
             });
 
-            console.log('userid')
-            console.log(that.data.userid);
+            //  console.log('userid')
+            //  console.log(that.data.userid);
           }
         })
       }
@@ -371,11 +390,9 @@ Page({
   //向后台请求数据
   search: function (e) {
     my.showLoading({
-      title: "数据加载中",
+      content: "数据加载中",
       mask: true
     });
-    console.log('userid type');
-    console.log(typeof this.data.userid);
 
     let that = this;
     my.fncontext.callFunction({
@@ -384,8 +401,6 @@ Page({
         id: that.data.userid
       },
       success: res => {
-        console.log("search");
-        console.log(res);
         if (res.result != -1) {
           // var user_data = res.result[0];
           // console.log('user_data')
@@ -419,6 +434,13 @@ Page({
     //   }
     // });
   },
+  alert(){
+    my.alert({
+      title:'注意',
+      content:'本程序用于支付宝开发大赛，一些功能不够完善，建议不要用于其它用途'
+
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -426,7 +448,7 @@ Page({
   async onLoad(options) {
     let that = this;
     my.showLoading({
-      title: "数据加载中",
+      content: "数据加载中",
       mask: true
     });
     setTimeout("", 3000);
@@ -444,7 +466,7 @@ Page({
     that.user_set();
 
     // 这里不是同步顺序执行，导致了userid来不及更新
-    that.search();
+    //that.search();
     my.hideLoading();
 
   },
@@ -457,7 +479,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow1: function () {
     let that = this;
 
     if (that.data.mywish != -1 && that.data.wish_up == true) {
@@ -468,14 +490,14 @@ Page({
       });
     };
     this.user_set();
-    console.log('hasuser');
-    console.log(that.data.hasUserInfo);
+    // console.log('hasuser');
+    // console.log(that.data.hasUserInfo);
     if (this.data.hasUserInfo) {
       console.log('get onloauch in show');
       that.onLaunch();
     };
-    console.log('app id');
-    console.log(app.globalData.userid);
+    // console.log('app id');
+    // console.log(app.globalData.userid);
   },
 
   /**
@@ -491,7 +513,11 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {},
+  onPullDownRefresh: function () {
+    this.onShow1();
+    console.log('刷新了')
+    my.stopPullDownRefresh();
+  },
 
   /**
    * 页面上拉触底事件的处理函数

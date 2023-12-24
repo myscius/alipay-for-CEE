@@ -188,12 +188,12 @@ Page({
           },
             success: function(res) {
                 var line_list = res.result;
-                console.log(res.result);
+                // console.log(res.result);
 
                 if (res.result.length == 0) {
                     my.showToast({
                         type: 'fail',
-                        content: "搜索失败请尝试其他选项",
+                        content: "暂无更多数据，请尝试其他选项",
                         mask:true
                         
         

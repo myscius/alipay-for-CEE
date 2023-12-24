@@ -119,7 +119,7 @@ Page({
     },
     //搜索分数向后台请求数据
     async search(e) {
-      console.log('nb')
+      // console.log('nb')
         let that =this
         var context = await my.getCloudContext();
         context.callFunction({
@@ -138,7 +138,7 @@ Page({
                   flag=flag+1;
                 }
               }
-              console.log(res)
+              // console.log(res)
               if(flag==0){
                 var average_2015 = "college_grade[0].average";
                 var average_2016 = "college_grade[1].average";
@@ -165,7 +165,7 @@ Page({
               }else{
                 my.showToast({
                   type: 'fail',
-                  content: "数据库缺失搜索失败请尝试其他选项",    
+                  content: "暂无更多数据，请尝试其他选项",    
                   duration:3000        
               });
               var college_grade1=that.data.college_grade;
@@ -203,11 +203,11 @@ Page({
                flag=flag+1;
              }
            }
-          console.log(res)
+          // console.log(res)
           if(flag==0){
             var major_info = res.result[3];
-            console.log(major_info)
-            console.log(res.result[0][0]['name'])
+            // console.log(major_info)
+            // console.log(res.result[0][0]['name'])
           // console.log(res.data);
             var average_2015 = "college_grade[0].average";
             var average_2016 = "college_grade[1].average";
@@ -253,7 +253,7 @@ Page({
           }else{
             my.showToast({
               type: 'fail',
-              content: "数据库缺失搜索失败请尝试其他选项",    
+              content: "暂无更多数据，请尝试其他选项",    
               duration:3000        
           });
           }
@@ -281,7 +281,7 @@ Page({
             that.setData({
                 sch_id: options.sch_id
             });
-            console.log(options.sch_id)
+            // console.log(options.sch_id)
             that.get_college1();
         }
     },

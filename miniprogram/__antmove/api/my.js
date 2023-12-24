@@ -734,58 +734,6 @@ const apiObj = {startBeaconDiscovery:{fn: function fn (obj = {}) {
                 obj.url = obj.filePath;
             }
             return my.saveImage(obj);
-        },},openLocation:{fn: function fn (obj = {}) {
-            if (obj.scale) {
-                utils.warn(
-                    "支付宝scale的取值为3-19，默认15", {
-                        apiName: 'openLocation/scale',
-                        errorType: 4,
-                        type: 'api'
-                    }
-                );
-
-                if (obj.scale > 19) {
-                    obj.scale = 19;
-                } else if (obj.scale < 3) {
-                    obj.scale = 3;
-                }
-            }
-            return my.openLocation(obj);
-        },},getLocation:{fn: function fn (obj = {}) {
-            let type = obj.type || "wgs84";
-            let getLocationProps = descObj.getLocation.body.returnValue.props;
-            my.getLocation({
-                ...obj,
-                type: 0,
-                success: function (res) {
-                    let data = res;
-                    if (type === "wgs84") {
-                        let lnglat = utils.gcj02towgs84(
-                            res.longitude,
-                            res.latitude
-                        );
-
-                        data = Object.assign(res, {
-                            longitude: lnglat[0],
-                            latitude: lnglat[1]
-                        });
-                    }
-                    data = utils.defineGetter(
-                        data,
-                        getLocationProps,
-                        function (obj, prop) {
-                            utils.warn(
-                                `getLocation的返回值不支持 ${prop} 属性!`, {
-                                    apiName: `getLocation/${prop}`,
-                                    errorType: getLocationProps[prop].type,
-                                    type: 'api'
-                                }
-                            );
-                        }
-                    );
-                    obj.success && obj.success(data);
-                }
-            });
         },},openCard:{fn: function fn (obj) {
             let openCardParams = descObj.openCard.body.params.props;
             let params = utils.defineGetter(obj, openCardParams, function (obj,prop) {
@@ -1409,41 +1357,6 @@ const apiObj = {startBeaconDiscovery:{fn: function fn (obj = {}) {
                 );
             });
             return my.ap.faceVerify(params);
-        },},getSetting:{fn: function fn (options = {}) {
-            function setLocation (cb) {
-                my.getLocation({
-                    success (res) {
-                        res.authSetting['scope.userLocation'] = true;
-                        cb && cb();
-                    }
-                });
-            }
-            if (my.getSetting) {
-                my.getSetting({
-                    ...options,
-                    success (res) {
-                        const { success } = options
-
-                        if (!success) return
-
-                        success({
-                            authSetting: utils.mapAuthSetting(res.authSetting)
-                        })
-                    }
-                });
-            } else {
-                let res = {};
-                res.authSetting = {};
-                /**
-                   * scope=[userInfo, location, album, camera, audioRecord]
-                   */
-
-                if (options && options.success) {
-                    setLocation(function () {
-                        options.success(res);
-                    });
-                }
-            }
         },},openSetting:{fn: function fn (options = {}) {
               my.openSetting({
                 ...options,

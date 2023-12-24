@@ -60,6 +60,10 @@ Page({
     },
     //向后台请求数据
     async search(e) {
+      my.showLoading({
+        content:'加载中',
+        mask:true
+      })
         let that = this;
         var context = await my.getCloudContext();
         context.callFunction({
@@ -73,8 +77,8 @@ Page({
           success: function(res){
              
             var data=res.result;
-            console.log('hah')
-            console.log(data)
+            // console.log('hah')
+            // console.log(data)
             var major_list = data;
             var length = major_list.length;
             var major_fake = new Array();
@@ -92,6 +96,7 @@ Page({
                 major: major_fake,
                 num:length
             });
+            my.hideLoading();
 
           }
 

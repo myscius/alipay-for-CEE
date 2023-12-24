@@ -15,22 +15,17 @@
     "pages/out/out",
     "pages/college_inc/collrgr_inc",
     "pages/index1/index1",
-    "pages/index/index",
-    "pages/helloworld/helloworld",
-    "pages/index3/index3",
-    "pages/index2/index2",
     "pages/major_watch/major_watch",
     "pages/province_line/province_line",
     "pages/admission_line/admission_line",
     "pages/twobest/twobest",
-    "pages/colleges/index",
     "pages/mine/index",
-    "pages/college_search/college_search",
-    "pages/advice/advice"
+    "pages/college_search/college_search"
   ],
   "window": {
     "titleBarColor": "#ED5276",
-    "defaultTitle": "高考志愿小助手"
+    "defaultTitle": "高考志愿小助手",
+    "allowsBounceVertical": "YES"
   },
   "tabBar": {
     "textColor": "#dddddd",

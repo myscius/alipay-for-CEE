@@ -430,14 +430,14 @@ page {
 }
 
 .fa-close_input,
-.fa-close_university {
+/* .fa-close_university {
     font-size: 80rpx;
     color: #ed5276;
     position: absolute;
     bottom: 10rpx;
     right: 40rpx;
     display: block;
-}
+} */
 
 .fa-check_input,
 .fa-search_university {
@@ -458,14 +458,14 @@ page {
     display: block;
 }
 
-.fa-close_university {
+/* .fa-close_university {
     font-size: 80rpx;
     color: #ed5276;
     position: fixed;
     top: -350rpx;
     right: 20rpx;
     display: block;
-}
+} */
 
 #curtain_university_top {
     width: 100%;
@@ -801,4 +801,49 @@ page {
 .bu{
   width: 50%;
   display:inline-block;
+}
+
+
+.fa-close_university {
+  font-size: 80rpx;
+  color: #ed5276;
+  position: absolute;
+  bottom: 10rpx;
+  right: 40rpx;
+  display: block;
+}
+
+.fa-search_university {
+  font-size: 80rpx;
+  color: #ed5276;
+  position: absolute;
+  bottom: 10rpx;
+  left: 40rpx;
+  display: block;
+}
+#university_input input {
+  background-color: #fff;
+  width: 600rpx;
+  border: 1px solid #bbb;
+  border-radius: 40rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  text-align: center;
+  letter-spacing: 1px;
+}
+#university_input {
+    width: 600rpx;
+    position: fixed;
+    z-index: 15;
+    top: 400rpx;
+    left: 75rpx;
+    height: 200rpx;}
+
+.fa-search_university {
+      font-size: 80rpx;
+      color: #ed5276;
+      position: absolute;
+      bottom: 10rpx;
+      left: 40rpx;
+      display: block;
 }

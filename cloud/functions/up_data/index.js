@@ -22,7 +22,7 @@ exports.main = async (event, context) => {
       mk_onegrade: event.user_data.Bubble[0].grade,
       mk_twograde: event.user_data.Bubble[1].grade,
       mk_thrgrade: event.user_data.Bubble[2].grade,
-      mz_oneschool: -1,
+      mz_oneschool: event.user_data.mywish,
       mz_twoschool: -1,
       mz_thrschool: -1,
       my_mobilePhoneNumber: event.user_data.tel,

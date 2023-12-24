@@ -4,13 +4,12 @@
       <view class='head_in'>
       </view>
       <view class='haed_out'>
-        <view class='head_logo'>
+        <view class='head_logo' onTap='antmoveAction1'>
           <image
             class='userinfo-avatar'
             src='{{userInfo.avatarUrl}}'
             background-size='cover'
-            onTap='antmoveAction'
-            data-antmove-tap='bindViewTap'
+            
           >
           </image>
           <btn
@@ -141,10 +140,10 @@
         </text>
       </view>
     </view>
-    <view class="luqi">
+    <view class="luqi" onTap="alert">
 
 
-      <custom-navigator class='me_advice' open-type='navigate' url='../advice/advice'>
+      <custom-navigator class='me_advice' >
         <icon class='fa fa-comments-o fa-lg'>
         </icon>
         <text>

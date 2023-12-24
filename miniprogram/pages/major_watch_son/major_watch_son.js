@@ -43,7 +43,7 @@ Page({
                 code:options.code
               },
               success: function(res) {
-                console.log(res.result);
+                // console.log(res.result);
                 var major_list = res.result;
                 var length = major_list.length;
                 var major_fake = new Array();

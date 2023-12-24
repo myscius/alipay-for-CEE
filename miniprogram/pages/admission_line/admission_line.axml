@@ -10,10 +10,12 @@
     加一个弹窗
   </view> -->
   <view a:if="{{showInputBox}}" class="page-mask" >
-    <view class="input-box">
+    <view id='university_input'>
       <input placeholder="请输入正确的大学名称" value="{{inputValue}}" onInput="inputChange"></input>
-      <button class="bu" onTap="submitInput">提交</button>
-      <button class="bu" onTap="cancel">取消</button>
+      <view class='fa fa-close fa-lg fa-close_university' onTap="cancel">
+      </view>
+      <view class='fa fa-search fa-lg fa-search_university' onTap="submitInput">
+      </view>
     </view>
   </view>
   <view class='province_line'>

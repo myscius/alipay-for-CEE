@@ -29,7 +29,7 @@ Page({
           data:{
           },
             success: function(res) {
-              console.log(res)
+              // console.log(res)
                 var psy_list = res.result;
                 var length = psy_list.length;
                 var psy_fake = new Array();

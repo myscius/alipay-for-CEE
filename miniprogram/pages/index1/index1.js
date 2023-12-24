@@ -43,7 +43,7 @@ Page({
       url: "../college_search/college_search?college_name=" + value
     })
     // 在这里执行提交操作，可以发送请求或进行其他逻辑处理
-    console.log('提交的值为：', value);
+    // console.log('提交的值为：', value);
 
     // 提交完成后，隐藏输入框
     this.setData({
@@ -82,7 +82,7 @@ Page({
   antmoveAction5(e) {
     var i = e.currentTarget.dataset.key;
 
-    console.log(i)
+    // console.log(i)
 
     my.navigateTo({
       url: "../twobest/twobest?code=" + i
@@ -90,7 +90,7 @@ Page({
   },
   onChange: function ( e) {
     
-    console.log(e);
+    // console.log(e);
     this.setData({
       rank:e
     })
@@ -123,7 +123,7 @@ Page({
 
       },
       success: function(res){
-        console.log(res)
+        // console.log(res)
         if(res.result.length!=0){
           my.navigateTo({
             url: "/pages/college_major/college_major?rank="+that.data.rank+"&province="+that.data.array[that.data.index]+"&direction="+ that.data.array1[that.data.index1]
@@ -134,7 +134,7 @@ Page({
         }else{
           my.showToast({
             type:'fail',
-            content:'数据库缺失，请调整你的名次或选项',
+            content:'暂无更多数据，请调整你的名次或选项',
             duration: 3000
           })
         }
@@ -144,7 +144,7 @@ Page({
     }else{
       my.showToast({
         type:'fail',
-        content:'数据库缺失，请调整你的名次或选项',
+        content:'暂无更多数据，请调整你的名次或选项',
         duration: 3000
       })
     }

@@ -20,7 +20,7 @@ exports.main = async (event, context) => {
     '  `mk_onegrade` int(11) NOT NULL DEFAULT -1,\n' +
     '  `mk_twograde` int(11) NOT NULL DEFAULT -1,\n' +
     '  `mk_thrgrade` int(11) NOT NULL DEFAULT -1,\n' +
-    '  `mz_oneschool` int(11) NOT NULL DEFAULT -1,\n' +
+    '  `mz_oneschool` varchar(30) NOT NULL DEFAULT -1,\n' +
     '  `mz_twoschool` int(11) NOT NULL DEFAULT -1,\n' +
     '  `mz_thrschool` int(11) NOT NULL DEFAULT -1,\n' +
     '  `my_mobilePhoneNumber` int(11) NOT NULL DEFAULT -1,\n' +
@@ -68,7 +68,7 @@ exports.main = async (event, context) => {
   // const deleted = await mysql.delete('user_login', { id: inserted.insertId });
   // console.log(`成功删除 ${deleted.affectedRows} 条数据`);
 
-  const ans =  mysql.query('SELECT * FROM user_login WHERE user_name = ?', [event.nickName]);
+  const ans =  mysql.query('SELECT * FROM user_login WHERE password = ?', [event.userid]);
   return ans;
 
 };

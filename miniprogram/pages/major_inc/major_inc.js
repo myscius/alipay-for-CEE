@@ -48,7 +48,7 @@ Page({
         if (res.result.length == 0) {
           my.showToast({
             type: 'fail',
-            content: '数据缺失',
+            content: '暂无更多数据，请等待跳转',
             duration: 2000
           });
           setTimeout(function(){
@@ -71,7 +71,7 @@ Page({
   
   
             success: function (res) {
-              console.log(res);
+              // console.log(res);
               var arr = [];
               for (var i = 0; i < res.result.length; i++) {
                 arr.push(res.result[i].id)
@@ -86,7 +86,7 @@ Page({
                 },
   
                 success: function (res) {
-                  console.log(res)
+                  // console.log(res)
                   var school_list = res.result;
                   var length = school_list.length;
                   var school_fake = new Array();

@@ -3,5 +3,7 @@
     "btn": "/__antmove/component/btn/btn",
 		"custom-navigator": "/__antmove/component/custom-navigator/custom-navigator"
   },
-  "styleIsolation": "apply-shared"
+  "styleIsolation": "apply-shared",
+  "pullRefresh": true
 }
+

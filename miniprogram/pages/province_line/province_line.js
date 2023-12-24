@@ -149,7 +149,7 @@ Page({
         pro_batch: that.data.arrangement_num //批次
       },
       success: function (res) {
-        console.log(res)
+        // console.log(res)
         var line_list = res.result;
 
         if (line_list != 0) {
